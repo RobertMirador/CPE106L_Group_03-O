@@ -1,47 +1,41 @@
-def mean(L):
-    total = 0
-    for x in L:
-        total += x #total = total +x
-    mean = total / len(L)
-    return mean
+def mean(arr):
+    if len(arr)==0:
+        return 0
+    #average = sum of elements/no of elements
+    return sum(arr)/len(arr)
 
-
-def median(L):
-    L.sort()
-    if len(L)%2 != 0:
-        median = L[int(len(L)/2)]
+def median(arr):
+    if len(arr)==0:
+        return 0
+    #sorting the list in ascending order
+    arr.sort()
+    n=len(arr)
+    #if len is even
+    if n%2==0:
+        #returning sum of middle elements/2
+        return (arr[n//2]+arr[n//2-1])/2
     else:
-        median = L[(int(len(L)/2)) - 1] +  L[int(len(L)/2)]
-        median = median/2
-    return median
+        #returning middle of list
+        return arr[n//2]
+    
+def mode(arr):
+    if len(arr)==0:
+        return 0
+    cnt=0
+    md=0
+    arr.sort()
+    for i in arr:
+        #if count of i has greater than the previous
+        if arr.count(i)>cnt:
+            #new max count is assigned
+            cnt=arr.count(i)
+            #returning middle of list
+            md=i
+            return md
 
-
-def mode(L):
-    counter = 0
-    num = L[0]
-
-    for i in L:
-        curr_frequency = L.count(i)
-        if(curr_frequency > counter):
-            counter = curr_frequency
-            num = i
-        if len(set(L)) == len(L):
-            return 'there is no mode'
-
-    return num
-
-
-number_list = []
-
-while(True):
-    ask = input('enter a number and say "stop" to end: ')
-
-    if ask == 'stop':
-        break
-    number_list.append(int(ask))
-
-mean = str(mean(number_list))
-median = str(median(number_list))
-mode = str(mode(number_list))
-
-print('mean: '+ mean + '\n' + 'median: ' + median + '\n' + 'mode: ' + mode)
+def main():
+    arr=[1,2,3,4,1,3,4,2,1,3,4,2]
+    print("Mean:",mean(arr))
+    print("Median:",median(arr))
+    print("Mode:",mode(arr))
+main()
